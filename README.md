@@ -206,7 +206,7 @@ pip install streamlit pandas
 ### 3. Run the Application
 
 ```bash
-streamlit run app.py
+streamlit run bankapp.py
 ```
 
 ---
