@@ -1,4 +1,4 @@
-# 🏦 BankDB Transaction Monitoring System
+# BankDB Transaction Monitoring System
 
 A secure and intelligent banking management platform built with **Python, Streamlit, SQLite, and Pandas**. The system provides comprehensive banking operations including customer management, account management, transaction processing, audit logging, security monitoring, and automated fraud detection through high-value transaction alerts.
 
@@ -6,9 +6,9 @@ Designed with **Role-Based Access Control (RBAC)**, the application supports bot
 
 ---
 
-## 🚀 Features
+## Features
 
-### 👨‍💼 Administrator Features
+### Administrator Features
 
 * Customer Management (Create, View, Update, Delete)
 * Bank Account Management
@@ -21,7 +21,7 @@ Designed with **Role-Based Access Control (RBAC)**, the application supports bot
 * Branch-wise Financial Reports
 * Real-Time Banking Statistics
 
-### 👤 Customer Features
+### Customer Features
 
 * Secure Login
 * Create New Bank Accounts
@@ -33,7 +33,7 @@ Designed with **Role-Based Access Control (RBAC)**, the application supports bot
 
 ---
 
-## 🔐 Security Features
+## Security Features
 
 ### Account Protection
 
@@ -64,7 +64,7 @@ The system records:
 
 ---
 
-## 🚨 Fraud Detection & Monitoring
+## Fraud Detection & Monitoring
 
 The application automatically monitors all banking transactions.
 
@@ -96,7 +96,7 @@ The system automatically:
 
 ---
 
-## 📂 Database Schema
+## Database Schema
 
 ### Customers Table
 
@@ -187,7 +187,7 @@ Stores authentication and security-related events.
 
 ---
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
 ### 1. Clone the Repository
 
@@ -211,7 +211,7 @@ streamlit run bankapp.py
 
 ---
 
-## 🔑 Default Administrator Credentials
+## Default Administrator Credentials
 
 > These credentials are provided for demonstration and academic purposes.
 
@@ -221,7 +221,7 @@ streamlit run bankapp.py
 
 ---
 
-## 📊 System Modules
+## System Modules
 
 ### Customer Management
 
@@ -260,7 +260,7 @@ streamlit run bankapp.py
 
 ---
 
-## 🎯 Business Rules
+## Business Rules
 
 * Minimum account balance must remain **₹1000**
 * Account numbers are automatically generated
@@ -273,7 +273,7 @@ streamlit run bankapp.py
 
 ---
 
-## 🖥️ User Interface
+## User Interface
 
 The application features:
 
@@ -286,7 +286,7 @@ The application features:
 
 ---
 
-## 📚 Educational Concepts Demonstrated
+## Educational Concepts Demonstrated
 
 This project demonstrates practical implementation of:
 
@@ -302,15 +302,7 @@ This project demonstrates practical implementation of:
 
 ---
 
-## 👨‍💻 Author
-
-**Soumyadeep Basu**
-
-Developed as a Banking Transaction Monitoring and Security Management System using Python, Streamlit, SQLite, and Pandas.
-
----
-
-## 📜 License
+## License
 
 This project is developed for educational, academic, and learning purposes.
 
