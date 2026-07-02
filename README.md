@@ -187,30 +187,6 @@ Stores authentication and security-related events.
 
 ---
 
-## Installation & Setup
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/your-username/bankdb-transaction-monitoring-system.git
-
-cd bankdb-transaction-monitoring-system
-```
-
-### 2. Install Dependencies
-
-```bash
-pip install streamlit pandas
-```
-
-### 3. Run the Application
-
-```bash
-streamlit run bankapp.py
-```
-
----
-
 ## Default Administrator Credentials
 
 > These credentials are provided for demonstration and academic purposes.
