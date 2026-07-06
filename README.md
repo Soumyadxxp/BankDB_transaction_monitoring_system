@@ -34,6 +34,16 @@ Designed with **Role-Based Access Control (RBAC)**, the application supports bot
 <img width="1600" height="1112" alt="image" src="https://github.com/user-attachments/assets/d956f80c-8bb5-4182-ba25-6512db3efb44" />
 <img width="1600" height="1112" alt="image" src="https://github.com/user-attachments/assets/507d210c-7f3c-41a2-8005-c1ca15572053" />
 <img width="1600" height="1112" alt="image" src="https://github.com/user-attachments/assets/4a79a878-3b0e-40bc-8143-acb4db0dcb9a" />
+<img width="1280" height="889" alt="image" src="https://github.com/user-attachments/assets/fed51987-1a87-4737-87da-01af60d5ab5b" />
+<img width="1280" height="889" alt="image" src="https://github.com/user-attachments/assets/2ee1f000-ad6c-4845-93d0-67e6ef263d7f" />
+<img width="1280" height="889" alt="image" src="https://github.com/user-attachments/assets/7bf111c8-0588-49b5-af7c-4dbf372aa24c" />
+<img width="1280" height="889" alt="image" src="https://github.com/user-attachments/assets/818b64e1-14a7-4e89-9a68-e1ae483555fb" />
+<img width="1280" height="889" alt="image" src="https://github.com/user-attachments/assets/bd568956-a1a5-4518-8ce6-7cdeb1a578a2" />
+<img width="1280" height="889" alt="image" src="https://github.com/user-attachments/assets/97c4e3c8-1a66-490e-8515-fd141b96519d" />
+<img width="1280" height="889" alt="image" src="https://github.com/user-attachments/assets/50da650a-b265-4d89-84e8-3ca7ab6bd7c1" />
+<img width="1600" height="1112" alt="image" src="https://github.com/user-attachments/assets/7cb114c3-734f-487d-9f23-d6327be6c283" />
+<img width="1600" height="1112" alt="image" src="https://github.com/user-attachments/assets/83f1dcf6-1e79-48d5-8e39-201908d0fb18" />
+<img width="1600" height="1112" alt="image" src="https://github.com/user-attachments/assets/1614b2f6-32ae-466d-bfc0-3ca8207efe69" />
 
 
 ## Features
