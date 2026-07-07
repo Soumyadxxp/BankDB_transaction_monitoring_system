@@ -136,104 +136,113 @@ The system automatically:
 
 ---
 
-## Database Schema
+# Database Schema
 
-### Customers Table
+## Customers Table (`customers`)
 
-Stores customer information and login security data.
-
-| Field           |
-| --------------- |
-| customer_id     |
-| full_name       |
-| email           |
-| phone           |
-| city            |
-| failed_attempts |
-| lock_until      |
+| Column Name | Data Type | Constraints | Description |
+|-------------|-----------|-------------|-------------|
+| `customer_id` | INTEGER | PRIMARY KEY, AUTOINCREMENT | Unique Customer ID |
+| `full_name` | TEXT | NOT NULL | Customer Full Name |
+| `email` | TEXT | Nullable | Customer Email (used for login) |
+| `phone` | TEXT | NOT NULL | 10-digit Mobile Number |
+| `city` | TEXT | NOT NULL | Customer City |
+| `failed_attempts` | INTEGER | DEFAULT 0 | Number of Failed Login Attempts |
+| `lock_until` | DATETIME | DEFAULT NULL | Account Lock Expiry Time |
 
 ---
 
-### Accounts Table
+## Accounts Table (`accounts`)
 
-Stores account details and balances.
-
-| Field          |
-| -------------- |
-| account_number |
-| customer_id    |
-| branch         |
-| balance        |
-| account_type   |
+| Column Name | Data Type | Constraints | Description |
+|-------------|-----------|-------------|-------------|
+| `account_number` | INTEGER | PRIMARY KEY, AUTOINCREMENT | Unique Bank Account Number |
+| `customer_id` | INTEGER | FOREIGN KEY → `customers.customer_id` | Customer ID |
+| `branch` | TEXT | Nullable | Branch Name |
+| `balance` | NUMERIC(12,2) | DEFAULT 1000, CHECK(balance >= 1000) | Current Account Balance |
+| `account_type` | TEXT | CHECK ('savings','current') | Type of Account |
 
 ---
 
-### Transactions Table
+## Transactions Table (`transactions`)
 
-Maintains transaction records.
-
-| Field            |
-| ---------------- |
-| transaction_id   |
-| account_number   |
-| transaction_type |
-| amount           |
-| transaction_time |
+| Column Name | Data Type | Constraints | Description |
+|-------------|-----------|-------------|-------------|
+| `transaction_id` | INTEGER | PRIMARY KEY, AUTOINCREMENT | Unique Transaction ID |
+| `account_number` | INTEGER | FOREIGN KEY → `accounts.account_number` | Account Number |
+| `transaction_type` | TEXT | CHECK ('deposit','withdraw') | Transaction Type |
+| `amount` | NUMERIC(12,2) | NOT NULL | Transaction Amount |
+| `transaction_time` | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP | Date & Time of Transaction |
 
 ---
 
-### Alerts Table
+## Alerts Table (`alerts`)
 
-Stores high-value transaction alerts.
-
-| Field          |
-| -------------- |
-| alert_id       |
-| account_number |
-| amount         |
-| alert_time     |
-| message        |
+| Column Name | Data Type | Constraints | Description |
+|-------------|-----------|-------------|-------------|
+| `alert_id` | INTEGER | PRIMARY KEY, AUTOINCREMENT | Alert ID |
+| `account_number` | INTEGER | FOREIGN KEY → `accounts.account_number` | Account Number |
+| `amount` | NUMERIC(12,2) | NOT NULL | Suspicious Transaction Amount |
+| `alert_time` | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP | Alert Generation Time |
+| `message` | TEXT | Nullable | Alert Message |
 
 ---
 
-### Admin Logs Table
+## Admin Logs Table (`admin_logs`)
 
-Maintains administrator activity records.
-
-| Field          |
-| -------------- |
-| log_id         |
-| table_name     |
-| operation_type |
-| record_id      |
-| old_data       |
-| new_data       |
-| action_time    |
+| Column Name | Data Type | Constraints | Description |
+|-------------|-----------|-------------|-------------|
+| `log_id` | INTEGER | PRIMARY KEY, AUTOINCREMENT | Log ID |
+| `table_name` | TEXT | Nullable | Modified Table Name |
+| `operation_type` | TEXT | Nullable | INSERT / UPDATE / DELETE |
+| `record_id` | TEXT | Nullable | Affected Record ID |
+| `old_data` | TEXT | Nullable | Previous Record Data |
+| `new_data` | TEXT | Nullable | Updated Record Data |
+| `action_time` | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP | Action Timestamp |
 
 ---
 
-### Security Logs Table
+## Security Logs Table (`security_logs`)
 
-Stores authentication and security-related events.
-
-| Field           |
-| --------------- |
-| log_id          |
-| customer_id     |
-| event_type      |
-| failed_attempts |
-| event_time      |
-| details         |
+| Column Name | Data Type | Constraints | Description |
+|-------------|-----------|-------------|-------------|
+| `log_id` | INTEGER | PRIMARY KEY, AUTOINCREMENT | Security Log ID |
+| `customer_id` | INTEGER | FOREIGN KEY → `customers.customer_id` | Customer ID |
+| `event_type` | TEXT | Nullable | Security Event Type |
+| `failed_attempts` | INTEGER | Nullable | Failed Login Attempts |
+| `event_time` | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP | Event Timestamp |
+| `details` | TEXT | Nullable | Security Event Description |
 
 ---
 
-## Default Administrator Credentials
+# Database Relationships
 
-> These credentials are provided for demonstration and academic purposes.
+| Parent Table | Child Table | Relationship |
+|--------------|-------------|--------------|
+| `customers` | `accounts` | One customer can own multiple bank accounts (`customer_id`). |
+| `accounts` | `transactions` | One account can have multiple transactions (`account_number`). |
+| `accounts` | `alerts` | One account can generate multiple high-value transaction alerts (`account_number`). |
+| `customers` | `security_logs` | One customer can have multiple security log entries (`customer_id`). |
+| `customers` | `admin_logs` | Customer operations (INSERT, UPDATE, DELETE) are automatically logged through database triggers. |
+| `accounts` | `admin_logs` | Account operations (INSERT, UPDATE, DELETE) are automatically logged through database triggers. |
 
-| Username | Password   |
-| -------- | ---------- |
-| admin    | admin@1234 |
+---
+
+# Database Triggers
+
+| Trigger Name | Event | Purpose |
+|--------------|-------|---------|
+| `high_value_transaction_alert` | AFTER INSERT ON `transactions` | Creates an alert for transactions of ₹50,000 or more. |
+| `customer_insert_log` | AFTER INSERT ON `customers` | Records customer creation in `admin_logs`. |
+| `customer_update_log` | AFTER UPDATE ON `customers` | Records customer information updates. |
+| `customer_delete_log` | AFTER DELETE ON `customers` | Records customer deletion. |
+| `account_insert_log` | AFTER INSERT ON `accounts` | Records account creation. |
+| `account_update_log` | AFTER UPDATE ON `accounts` | Records account modifications. |
+| `account_delete_log` | AFTER DELETE ON `accounts` | Records account deletion. |
+| `customer_failed_login` | AFTER UPDATE ON `customers` | Logs failed login attempts. |
+| `customer_locked` | AFTER UPDATE ON `customers` | Logs account lock events after multiple failed logins. |
+| `customer_unlocked` | AFTER UPDATE ON `customers` | Logs account unlock events performed by an administrator. |
+
 
 ---
 
