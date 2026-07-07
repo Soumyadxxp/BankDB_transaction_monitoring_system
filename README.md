@@ -1,4 +1,4 @@
-# BankDB Transaction Monitoring System 
+# BankDB Transaction Monitoring System  
 
 A secure and intelligent banking management platform built with **Python, Streamlit, SQLite, and Pandas**. The system provides comprehensive banking operations including customer management, account management, transaction processing, audit logging, security monitoring, and automated fraud detection through high-value transaction alerts.
 
