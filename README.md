@@ -122,7 +122,7 @@ The system automatically:
 
 ---
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 | Technology      | Purpose                          |
 | --------------- | -------------------------------- |
@@ -243,46 +243,45 @@ The system automatically:
 | `customer_locked` | AFTER UPDATE ON `customers` | Logs account lock events after multiple failed logins. |
 | `customer_unlocked` | AFTER UPDATE ON `customers` | Logs account unlock events performed by an administrator. |
 
-
 ```mermaid
 erDiagram
 
     CUSTOMERS {
-        INTEGER customer_id PK
+        INT customer_id PK
         TEXT full_name
         TEXT email
         TEXT phone
         TEXT city
-        INTEGER failed_attempts
+        INT failed_attempts
         DATETIME lock_until
     }
 
     ACCOUNTS {
-        INTEGER account_number PK
-        INTEGER customer_id FK
+        INT account_number PK
+        INT customer_id FK
         TEXT branch
-        NUMERIC balance
+        DECIMAL balance
         TEXT account_type
     }
 
     TRANSACTIONS {
-        INTEGER transaction_id PK
-        INTEGER account_number FK
+        INT transaction_id PK
+        INT account_number FK
         TEXT transaction_type
-        NUMERIC amount
+        DECIMAL amount
         TIMESTAMP transaction_time
     }
 
     ALERTS {
-        INTEGER alert_id PK
-        INTEGER account_number FK
-        NUMERIC amount
+        INT alert_id PK
+        INT account_number FK
+        DECIMAL amount
         TIMESTAMP alert_time
         TEXT message
     }
 
     ADMIN_LOGS {
-        INTEGER log_id PK
+        INT log_id PK
         TEXT table_name
         TEXT operation_type
         TEXT record_id
@@ -292,21 +291,27 @@ erDiagram
     }
 
     SECURITY_LOGS {
-        INTEGER log_id PK
-        INTEGER customer_id FK
+        INT log_id PK
+        INT customer_id FK
         TEXT event_type
-        INTEGER failed_attempts
+        INT failed_attempts
         TIMESTAMP event_time
         TEXT details
     }
 
-    CUSTOMERS ||--o{ ACCOUNTS : owns
-    ACCOUNTS ||--o{ TRANSACTIONS : performs
-    ACCOUNTS ||--o{ ALERTS : generates
-    CUSTOMERS ||--o{ SECURITY_LOGS : creates
+    CUSTOMERS ||--|{ ACCOUNTS : owns
 
-    ADMIN_LOGS .. CUSTOMERS : "Audit Trail"
-    ADMIN_LOGS .. ACCOUNTS : "Audit Trail"
+    ACCOUNTS ||--|{ TRANSACTIONS : performs
+
+    ACCOUNTS ||--o{ ALERTS : raises
+
+    CUSTOMERS ||--o{ SECURITY_LOGS : generates
+
+    TRANSACTIONS ..> ALERTS : "Trigger (> ₹50,000)"
+
+    CUSTOMERS ..> ADMIN_LOGS : "Audit Trigger"
+
+    ACCOUNTS ..> ADMIN_LOGS : "Audit Trigger"
 ```
 
 ---
