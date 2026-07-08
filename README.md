@@ -247,41 +247,41 @@ The system automatically:
 erDiagram
 
     CUSTOMERS {
-        INT customer_id PK
+        INTEGER customer_id PK
         TEXT full_name
         TEXT email
         TEXT phone
         TEXT city
-        INT failed_attempts
+        INTEGER failed_attempts
         DATETIME lock_until
     }
 
     ACCOUNTS {
-        INT account_number PK
-        INT customer_id FK
+        INTEGER account_number PK
+        INTEGER customer_id FK
         TEXT branch
         DECIMAL balance
         TEXT account_type
     }
 
     TRANSACTIONS {
-        INT transaction_id PK
-        INT account_number FK
+        INTEGER transaction_id PK
+        INTEGER account_number FK
         TEXT transaction_type
         DECIMAL amount
         TIMESTAMP transaction_time
     }
 
     ALERTS {
-        INT alert_id PK
-        INT account_number FK
+        INTEGER alert_id PK
+        INTEGER account_number FK
         DECIMAL amount
         TIMESTAMP alert_time
         TEXT message
     }
 
     ADMIN_LOGS {
-        INT log_id PK
+        INTEGER log_id PK
         TEXT table_name
         TEXT operation_type
         TEXT record_id
@@ -291,10 +291,10 @@ erDiagram
     }
 
     SECURITY_LOGS {
-        INT log_id PK
-        INT customer_id FK
+        INTEGER log_id PK
+        INTEGER customer_id FK
         TEXT event_type
-        INT failed_attempts
+        INTEGER failed_attempts
         TIMESTAMP event_time
         TEXT details
     }
@@ -303,15 +303,10 @@ erDiagram
 
     ACCOUNTS ||--|{ TRANSACTIONS : performs
 
-    ACCOUNTS ||--o{ ALERTS : raises
+    ACCOUNTS ||--o{ ALERTS : generates
 
-    CUSTOMERS ||--o{ SECURITY_LOGS : generates
+    CUSTOMERS ||--o{ SECURITY_LOGS : logs
 
-    TRANSACTIONS ..> ALERTS : "Trigger (> ₹50,000)"
-
-    CUSTOMERS ..> ADMIN_LOGS : "Audit Trigger"
-
-    ACCOUNTS ..> ADMIN_LOGS : "Audit Trigger"
 ```
 
 ---
