@@ -243,6 +243,20 @@ The system automatically:
 | `customer_locked` | AFTER UPDATE ON `customers` | Logs account lock events after multiple failed logins. |
 | `customer_unlocked` | AFTER UPDATE ON `customers` | Logs account unlock events performed by an administrator. |
 
+### Entity Relationships
+
+| Parent Entity | Child Entity | Relationship |
+|---------------|--------------|--------------|
+| **Customers** | **Accounts** | One customer can own multiple bank accounts. |
+| **Accounts** | **Transactions** | One account can have multiple transactions. |
+| **Accounts** | **Alerts** | One account can generate multiple high-value transaction alerts. |
+| **Customers** | **Security Logs** | One customer can have multiple security log entries. |
+
+> **Note:** `ADMIN_LOGS` is an audit table populated through SQLite triggers (`INSERT`, `UPDATE`, and `DELETE`) rather than foreign key relationships. Therefore, it is intentionally not connected in the ER diagram.
+
+
+## Entity Relationship (ER) Diagram
+
 ```mermaid
 erDiagram
 
